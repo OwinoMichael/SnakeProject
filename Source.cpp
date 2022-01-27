@@ -372,6 +372,42 @@ void DrawSnake()
     }
 }
 
+void DrawScore()
+{
+    glLineWidth(1.5f);
+    glColor3f(1.0, 1.0, 1.0);
+
+    glPushMatrix();
+    glTranslatef(w / (5.4), h / (1.05), 0);
+    glScalef(0.3f, 0.3f, 0.3f);
+    draw_string(GLUT_STROKE_ROMAN, "Your score:");
+    glPopMatrix();
+    sprintf(sScore, "%9d", Score);
+    glPushMatrix();
+    glTranslatef(w / (5), h / (1.05), 0);
+    glScalef(0.3f, 0.3f, 0.3f);
+    draw_string(GLUT_STROKE_ROMAN, sScore);
+    glPopMatrix();
+
+    ifstream inFile("Snake.bin", ios_base::binary);
+    while (inFile.peek() != EOF)
+        inFile >> sHightScore;
+    inFile.close();
+    hightScore = atoi(sHightScore);
+    glPushMatrix();
+    glTranslatef(w / (1.6), h / (1.05), 0);
+    glScalef(0.3f, 0.3f, 0.3f);
+    draw_string(GLUT_STROKE_ROMAN, "High score:");
+    glPopMatrix();
+    glPushMatrix();
+    glTranslatef(w / (1.2), h / (1.05), 0);
+    glScalef(0.3f, 0.3f, 0.3f);
+    draw_string(GLUT_STROKE_ROMAN, sHightScore);
+    glPopMatrix();
+
+    glFinish();
+    glutSwapBuffers();
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
