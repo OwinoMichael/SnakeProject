@@ -447,6 +447,37 @@ void display()
     glFlush();
 }
 
+void fjfjfh()
+{
+    for (int i = 0; i < 2; i++)
+        m[i].New();
+    for (int i = 0; i < 10; i++)
+        u[i].New();
+
+    s[0].x = 25;
+    s[0].y = 15;
+}
+
+void MyKeyboard(int key, int a, int b)
+{
+    switch (key) {
+    case 101: // up
+        dir = 0;
+        break;
+    case 102: // right
+        dir = 2;
+        break;
+    case 100: // left
+        dir = 1;
+        break;
+    case 103: // down
+        dir = 3;
+        break;
+    case 27: // escape
+        exit(0);
+        break;
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
