@@ -290,6 +290,127 @@ void DrawRules()
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Tick()
+{
+    // Movement of the snake's body:
+    for (int i = num; i > 0; --i) {
+        s[i].x = s[i - 1].x;
+        s[i].y = s[i - 1].y;
+    }
+
+    // Movement of the snake's head:
+    switch (dir) {
+    case 0:
+        s[0].y += 1;
+        break;
+    case 1:
+        s[0].x -= 1;
+        break;
+    case 2:
+        s[0].x += 1;
+        break;
+    case 3:
+        s[0].y -= 1;
+        break;
+    }
+    int h = 0;
+    // The snake's length increases on eating a fruit:
+    for (int i = 0; i < 5; i++)
+        if ((s[0].x == m[i].x) && (s[0].y == m[i].y)) {
+            num++;
+            m[i].New();
+            if (h != 11) {
+                u[h].New();
+                h++;
+            }
+            else {
+                h = 0;
+                u[h].New();
+            }
+            Score += 2;
+        }
+
+    // The snake's length decreases on eating a bomb:
+    for (int i = 0; i < 10; i++)
+        if ((s[0].x == u[i].x) && (s[0].y == u[i].y)) {
+            if (num == 2)
+                key1 = 2;
+            if (num > 3)
+                num = num - 2;
+            else
+                num = 2;
+            u[i].New();
+            if (Score > 0)
+                Score--;
+            if (Score < 0)
+                Score = 0;
+        }
+
+    // Game ends on touching the boundary:
+    if (s[0].x > N || s[0].x < 0 || s[0].y > (M - 3) || s[0].y < 0) {
+        key1 = 2;
+    }
+
+    // The snake's length decreases if it eats its tail:
+    for (int i = 1; i < num; i++)
+        if (s[0].x == s[i].x && s[0].y == s[i].y) {
+            num = 3;
+            if (Score > 0)
+                Score -= 3;
+            if (Score < 0)
+                Score = 0;
+        }
+}
+
+void DrawSnake()
+{
+    glColor3f(0.0, 1.0, 0.0);
+    for (int i = 0; i < num; i++) {
+        glRectf(s[i].x * Scale, s[i].y * Scale, (s[i].x + 1) * Scale,
+            (s[i].y + 1) * Scale);
+    }
+}
+
+void DrawScore()
+{
+    glLineWidth(1.5f);
+    glColor3f(1.0, 1.0, 1.0);
+
+    glPushMatrix();
+    glTranslatef(w / (5.4), h / (1.05), 0);
+    glScalef(0.3f, 0.3f, 0.3f);
+    draw_string(GLUT_STROKE_ROMAN, "Your score:");
+    glPopMatrix();
+    sprintf(sScore, "%9d", Score);
+    glPushMatrix();
+    glTranslatef(w / (5), h / (1.05), 0);
+    glScalef(0.3f, 0.3f, 0.3f);
+    draw_string(GLUT_STROKE_ROMAN, sScore);
+    glPopMatrix();
+
+    ifstream inFile("Snake.bin", ios_base::binary);
+    while (inFile.peek() != EOF)
+        inFile >> sHightScore;
+    inFile.close();
+    hightScore = atoi(sHightScore);
+    glPushMatrix();
+    glTranslatef(w / (1.6), h / (1.05), 0);
+    glScalef(0.3f, 0.3f, 0.3f);
+    draw_string(GLUT_STROKE_ROMAN, "High score:");
+    glPopMatrix();
+    glPushMatrix();
+    glTranslatef(w / (1.2), h / (1.05), 0);
+    glScalef(0.3f, 0.3f, 0.3f);
+    draw_string(GLUT_STROKE_ROMAN, sHightScore);
+    glPopMatrix();
+
+    glFinish();
+    glutSwapBuffers();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void CreateGlutWindow()
 {
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA); // Mode selection: single buffer and RGBA colors
