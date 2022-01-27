@@ -411,6 +411,45 @@ void DrawScore()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+void display()
+{
+    switch (key1) {
+    case 1:
+        glClear(GL_COLOR_BUFFER_BIT);
+        glBegin(GL_POLYGON);
+        glColor3f(0.0, 0.0, 0.0);
+        glVertex3f(0.0, 800.0, 0.0);
+        glColor3f(0.0, 0.0, 0.0);
+        glVertex3f(0, 700.0, 0.0);
+        glColor3f(0.0, 0.0, 0.0);
+        glVertex3f(1400.0, 700.0, 0.0);
+        glColor3f(0.0, 0.0, 0.0);
+        glVertex3f(1400.0, 800.0, 0.0);
+        glEnd();
+        for (int i = 0; i < 2; i++)
+            m[i].DrawFruct();
+        for (int i = 0; i < 10; i++)
+            u[i].DrawBomb();
+        DrawSnake();
+        DrawScore();
+        break;
+    case 2:
+        DrawExit();
+        break;
+    case 3:
+        DrawMenu();
+        break;
+    case 4:
+        DrawRules();
+        break;
+    }
+    glFlush();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void CreateGlutWindow()
 {
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA); // Mode selection: single buffer and RGBA colors
