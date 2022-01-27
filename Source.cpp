@@ -69,7 +69,65 @@ void draw_string(void* font, const char* string)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void DrawMenu()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
 
+    glBegin(GL_POLYGON); // Start
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(705.0, 650.0, 0.0);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(500.0, 650.0, 0.0);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(500.0, 550.0, 0.0);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(705.0, 550.0, 0.0);
+    glEnd();
+    glBegin(GL_POLYGON); // Rules
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(705.0, 510.0, 0.0);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(500.0, 510.0, 0.0);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(500.0, 410.0, 0.0);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(705.0, 410.0, 0.0);
+    glEnd();
+    glBegin(GL_POLYGON); // Exit
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(670.0, 230.0, 0.0);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(540.0, 230.0, 0.0);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(540.0, 140.0, 0.0);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(670.0, 140.0, 0.0);
+    glEnd();
+
+    glLineWidth(4.0f);
+    glColor3f(1.0, 1.0, 1.0);
+
+    glPushMatrix();
+    glTranslatef(w / (2.38), h / (1.3), 0);
+    glScalef(0.4f, 0.4f, 0.4f);
+    draw_string(GLUT_STROKE_ROMAN, "START");
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(w / (2.38), h / (1.7), 0);
+    glScalef(0.4f, 0.4f, 0.4f);
+    draw_string(GLUT_STROKE_ROMAN, "RULES");
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(w / (2.229), h / (4.4), 0);
+    glScalef(0.4f, 0.4f, 0.4f);
+    draw_string(GLUT_STROKE_ROMAN, "EXIT");
+    glPopMatrix();
+
+    glFinish();
+    glutSwapBuffers();
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void CreateGlutWindow()
