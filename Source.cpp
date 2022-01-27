@@ -411,6 +411,125 @@ void DrawScore()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+void display()
+{
+    switch (key1) {
+    case 1:
+        glClear(GL_COLOR_BUFFER_BIT);
+        glBegin(GL_POLYGON);
+        glColor3f(0.0, 0.0, 0.0);
+        glVertex3f(0.0, 800.0, 0.0);
+        glColor3f(0.0, 0.0, 0.0);
+        glVertex3f(0, 700.0, 0.0);
+        glColor3f(0.0, 0.0, 0.0);
+        glVertex3f(1400.0, 700.0, 0.0);
+        glColor3f(0.0, 0.0, 0.0);
+        glVertex3f(1400.0, 800.0, 0.0);
+        glEnd();
+        for (int i = 0; i < 2; i++)
+            m[i].DrawFruct();
+        for (int i = 0; i < 10; i++)
+            u[i].DrawBomb();
+        DrawSnake();
+        DrawScore();
+        break;
+    case 2:
+        DrawExit();
+        break;
+    case 3:
+        DrawMenu();
+        break;
+    case 4:
+        DrawRules();
+        break;
+    }
+    glFlush();
+}
+
+void fjfjfh()
+{
+    for (int i = 0; i < 2; i++)
+        m[i].New();
+    for (int i = 0; i < 10; i++)
+        u[i].New();
+
+    s[0].x = 25;
+    s[0].y = 15;
+}
+
+void MyKeyboard(int key, int a, int b)
+{
+    switch (key) {
+    case 101: // up
+        dir = 0;
+        break;
+    case 102: // right
+        dir = 2;
+        break;
+    case 100: // left
+        dir = 1;
+        break;
+    case 103: // down
+        dir = 3;
+        break;
+    case 27: // escape
+        exit(0);
+        break;
+    }
+}
+
+void MousePressed(int button, int state, int ax, int ay)
+{
+    down = button == GLUT_LEFT_BUTTON && state == GLUT_LEFT;
+    if (down) {
+        if (key1 == 3) {
+            if (ax > (540.0) && ax < (670.0) && ay > (490.0) && ay < (600.0)) {
+                exit(0);
+            }
+            if (ax > (500.0) && ax < (705.0) && ay > (230.0) && ay < (330.0)) {
+                d = 1;
+                glClear(GL_COLOR_BUFFER_BIT);
+                fjfjfh();
+                key1 = 4;
+                display();
+            }
+            if (ax > (500.0) && ax < (705.0) && ay > (100.0) && ay < (190.0)) {
+                key1 = 1;
+                d = 2;
+                num = 5;
+                Score = 0;
+                fjfjfh();
+                display();
+            }
+        }
+        if (key1 == 2) {
+            if (ax > (580.0) && ax < (670.0) && ay > (660.0) && ay < (690.0)) {
+                exit(0);
+            }
+            if (ax > (540.0) && ax < (670.0) && ay > (580.0) && ay < (610.0)) {
+                key1 = 3;
+                d = 1;
+                glClear(GL_COLOR_BUFFER_BIT);
+                fjfjfh();
+                DrawMenu();
+            }
+        }
+        if (key1 == 4) {
+            if (ax > (520.0) && ax < (680.0) && ay > (580.0) && ay < (610.0)) {
+                key1 = 3;
+                d = 1;
+                glClear(GL_COLOR_BUFFER_BIT);
+                fjfjfh();
+                DrawMenu();
+            }
+        }
+    }
+    glutMouseFunc(MousePressed);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void CreateGlutWindow()
 {
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA); // Mode selection: single buffer and RGBA colors
