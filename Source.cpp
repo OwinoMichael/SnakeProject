@@ -215,6 +215,79 @@ void DrawExit()
     glFinish();
     glutSwapBuffers();
 }
+
+void DrawRules()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(710.0, 150.0, 0.0);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(490.0, 150.0, 0.0);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(490.0, 90.0, 0.0);
+    glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(710.0, 90.0, 0.0);
+    glEnd();
+
+    glLineWidth(1.8f);
+    glColor3f(0.0, 0.0, 0.0);
+
+    glPushMatrix();
+    glTranslatef(w / 3, h / (1.2), 0);
+    glScalef(0.5f, 0.5f, 0.5f);
+    draw_string(GLUT_STROKE_ROMAN, "How to play:");
+    glPopMatrix();
+    glPushMatrix();
+    glTranslatef(w / (3), h / (1.5), 0);
+    glScalef(0.2f, 0.2f, 0.2f);
+    draw_string(GLUT_STROKE_ROMAN, "1.Eat fruit to score points:");
+    glPopMatrix();
+    glPushMatrix();
+    glTranslatef(w / (3), h / (1.7), 0);
+    glScalef(0.2f, 0.2f, 0.2f);
+    draw_string(GLUT_STROKE_ROMAN, "2.Do not eat bombs:");
+    glPopMatrix();
+    glPushMatrix();
+    glTranslatef(w / (3), h / (2.0), 0);
+    glScalef(0.2f, 0.2f, 0.2f);
+    draw_string(GLUT_STROKE_ROMAN, "3.Do not eat yourself.");
+    glPopMatrix();
+    glPushMatrix();
+    glTranslatef(w / (3), h / (2.4), 0);
+    glScalef(0.2f, 0.2f, 0.2f);
+    draw_string(GLUT_STROKE_ROMAN, "4.Do not leave the window border.");
+    glPopMatrix();
+
+    glPushMatrix();
+    glColor3f(1.0, 1.0, 1.0);
+    glTranslatef(w / (2.5), h / 7, 0);
+    glScalef(0.19f, 0.2f, 0.2f);
+    draw_string(GLUT_STROKE_ROMAN, "Return to MENU");
+    glPopMatrix();
+
+    glLineWidth(3.0f);
+    glColor3f(0.0, 0.0, 0.0);
+    glPushMatrix();
+    glTranslatef(w / (2.7), h / (3.3), 0);
+    glScalef(0.4f, 0.4f, 0.4f);
+    draw_string(GLUT_STROKE_ROMAN, "Good luck!");
+    glPopMatrix();
+
+    glColor3f(1.0, 0.9, 0.0);
+    glRectf(780.0, 500.0, 805.0, 525.0);
+    glColor3f(1.0, 0.0, 0.0);
+    glBegin(GL_POLYGON);
+    for (float i = 0; i < 2 * 3.14; i += 3.14 / 4) {
+        glVertex2f(720.0 + (0.5) * Scale * (1.1) * sin(i),
+            450.0 + (0.5) * Scale * (1.1) * cos(i));
+    }
+    glEnd();
+
+    glFinish();
+    glutSwapBuffers();
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void CreateGlutWindow()
