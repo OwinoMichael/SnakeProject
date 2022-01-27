@@ -479,6 +479,55 @@ void MyKeyboard(int key, int a, int b)
     }
 }
 
+void MousePressed(int button, int state, int ax, int ay)
+{
+    down = button == GLUT_LEFT_BUTTON && state == GLUT_LEFT;
+    if (down) {
+        if (key1 == 3) {
+            if (ax > (540.0) && ax < (670.0) && ay > (490.0) && ay < (600.0)) {
+                exit(0);
+            }
+            if (ax > (500.0) && ax < (705.0) && ay > (230.0) && ay < (330.0)) {
+                d = 1;
+                glClear(GL_COLOR_BUFFER_BIT);
+                fjfjfh();
+                key1 = 4;
+                display();
+            }
+            if (ax > (500.0) && ax < (705.0) && ay > (100.0) && ay < (190.0)) {
+                key1 = 1;
+                d = 2;
+                num = 5;
+                Score = 0;
+                fjfjfh();
+                display();
+            }
+        }
+        if (key1 == 2) {
+            if (ax > (580.0) && ax < (670.0) && ay > (660.0) && ay < (690.0)) {
+                exit(0);
+            }
+            if (ax > (540.0) && ax < (670.0) && ay > (580.0) && ay < (610.0)) {
+                key1 = 3;
+                d = 1;
+                glClear(GL_COLOR_BUFFER_BIT);
+                fjfjfh();
+                DrawMenu();
+            }
+        }
+        if (key1 == 4) {
+            if (ax > (520.0) && ax < (680.0) && ay > (580.0) && ay < (610.0)) {
+                key1 = 3;
+                d = 1;
+                glClear(GL_COLOR_BUFFER_BIT);
+                fjfjfh();
+                DrawMenu();
+            }
+        }
+    }
+    glutMouseFunc(MousePressed);
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void CreateGlutWindow()
